@@ -1,0 +1,58 @@
+Metadata-Version: 2.1
+Name: birge-comm-net
+Version: 0.0.1
+Summary: A socket-based communication network library
+Home-page: https://github.com/T-K-233/Birge-Comm-Net-Python
+Author: -T.K.-
+Author-email: tk@uncertainty.email
+License: UNKNOWN
+Project-URL: Bug Tracker, https://github.com/T-K-233/Birge-Comm-Net-Python/issues
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: CC BY-NC 3.0
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# Birge Comm Net
+
+## Examples
+
+### Server
+
+```python
+from birge_comm_net import CommNetCore
+
+server = CommNetCore(("localhost", 8000), log_level=logging.INFO)
+server.run()
+```
+
+### Client 
+
+```python
+from birge_comm_net import CommNetNode
+
+    
+key = "/sensor_node_0/temperature"
+val = -100
+
+client = CommNetNode()
+client.connect(("localhost", 8000))
+
+while True:
+    client.set(key, val)
+    data = client.get(key)
+
+    #data = client.getAll()
+    
+    val = data["data"][key] + 1
+
+    print(val)     
+```
+
+### WebSocket Transponder
+
+see `examples/ws_transponder.py`
+
+
